@@ -1,0 +1,9 @@
+[workspace]
+resolver = "3"
+
+members = [
+    "app-core",
+    "cli",
+    "tui",
+    "gui",
+]
