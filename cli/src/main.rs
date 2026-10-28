@@ -1,7 +1,9 @@
-use app_core::{backup,read,paths};
-use std::{fs, io};
-use std::io::Write;
+use app_core::{read,paths};
 use app_core::backup::{check_backup_status, BackupStatus, backup_hosts};
+use app_core::permissions::check_backup_destination;
+use std::{io};
+use std::io::Write;
+use std::path::Path;
 
 fn backup_decision() -> io::Result<bool> {
 
@@ -44,7 +46,8 @@ fn main() -> std::io::Result<()>{
         }
     }
     match backup_decision() {
-        Ok(true) => { 
+        Ok(true) => {
+            check_backup_destination(&backup_path)?;
             let bytes = backup_hosts(&path, &backup_path)?;
             println!("Backup realizado: {:?} bytes", bytes);
         },
