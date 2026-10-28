@@ -13,8 +13,8 @@ pub enum BackupStatus {
 pub fn check_backup_status(origin: &Path, destination: &Path) -> io::Result<BackupStatus>  {
     let origin_metadata = fs::metadata(origin)?;
     if !origin_metadata.is_file() {
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidInput,
+        return Err(Error::new(
+            ErrorKind::InvalidInput,
             "El origen no es un archivo regular",
         ));
     }

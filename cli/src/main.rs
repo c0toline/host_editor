@@ -3,7 +3,6 @@ use app_core::backup::{check_backup_status, BackupStatus, backup_hosts};
 use app_core::permissions::check_backup_destination;
 use std::{io};
 use std::io::Write;
-use std::path::Path;
 
 fn backup_decision() -> io::Result<bool> {
 
@@ -34,7 +33,7 @@ fn backup_decision() -> io::Result<bool> {
 
 }
 
-fn main() -> std::io::Result<()>{
+fn main() -> io::Result<()>{
     let path = paths::default_hosts_path();
     let backup_path = paths::default_backup_path();
     if path != backup_path {

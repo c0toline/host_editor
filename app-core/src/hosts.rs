@@ -50,7 +50,7 @@ impl HostEntry {
             enabled: is_enabled
         };
 
-        return Some(entry);
+        Some(entry)
 
     }
     

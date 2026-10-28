@@ -32,7 +32,7 @@ fn test_read_nonexistent_file(){
         .join("nonexistent.txt");
     let hosts = read_hosts(&path);
     let error = hosts.unwrap_err();
-    assert_eq!(error.kind(), std::io::ErrorKind::NotFound);
+    assert_eq!(error.kind(), ErrorKind::NotFound);
 }
 
 #[test]
