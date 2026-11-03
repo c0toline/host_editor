@@ -22,8 +22,8 @@ pub fn check_backup_destination(destination: &Path) -> io::Result<()>{
         ));
     }
 
-    let _checker = tempfile::NamedTempFile::new_in(parent_folder)?;
+    let checker = tempfile::NamedTempFile::new_in(parent_folder);
 
-    drop(_checker);
+    drop(checker);
     Ok(())
 }

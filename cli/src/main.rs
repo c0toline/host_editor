@@ -47,7 +47,7 @@ fn main() -> io::Result<()>{
     match backup_decision() {
         Ok(true) => {
             check_backup_destination(&backup_path)?;
-            let bytes = backup_hosts(&path, &backup_path)?;
+            let bytes = backup_hosts(&path, &backup_path, false)?;
             println!("Backup realizado: {:?} bytes", bytes);
         },
         Ok(false) => {

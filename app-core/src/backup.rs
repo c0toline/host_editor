@@ -1,4 +1,5 @@
 use std::fs;
+use std::fs::OpenOptions;
 use std::io::{self, Error, ErrorKind};
 use std::path::Path;
 
@@ -39,9 +40,16 @@ pub fn check_backup_status(origin: &Path, destination: &Path) -> io::Result<Back
     }
 }
 
-pub fn backup_hosts(origin: &Path, destination: &Path) -> io::Result<Option<u64>>{
-    let bytes =  fs::copy(origin, destination)?;
+pub fn backup_hosts(origin: &Path, destination: &Path, overwrite: bool) -> io::Result<Option<u64>>{
+    /*let bytes =  fs::copy(origin, destination)?;
+    Ok(Some(bytes))*/
+    let mut origin_file = fs::File::open(origin)?;
+    let mut destination_file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(destination)?;
+    
+    let bytes = io::copy(&mut origin_file, &mut destination_file)?;
+    
     Ok(Some(bytes))
-
-
 }
